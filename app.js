@@ -23,8 +23,8 @@ app.get('/run', async (req, res)=>{
     })
 })
 
-app.listen(1111, ()=>{
-    console.log("server running on 1111");
+app.listen(80, ()=>{
+    console.log("server running on 80");
 })
 
 
