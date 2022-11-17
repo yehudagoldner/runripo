@@ -23,7 +23,9 @@ app.get('/run', async (req, res)=>{
     })
 })
 
-app.listen(1111)
+app.listen(1111, ()=>{
+    console.log("server running on 1111");
+})
 
 
 function shellLog(error, stdout, stderr){    
