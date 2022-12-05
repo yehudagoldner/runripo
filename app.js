@@ -26,7 +26,7 @@ app.get('/run', async (req, res) => {
     const child = exec(command, shellLog);
     child.on('close', () => {
         if(req.query.appType == 'react') {
-            res.redirect('http://localhost:3000')
+            res.redirect(`http://localhost:3000?rep=${req.query.rep}`)
             return;
         }
         const files = new glob.sync('**/*.html', { dot: true });
