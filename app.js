@@ -15,8 +15,8 @@ app.set('view engine', 'ejs')
 
 
 
+let react_port = 3333
 app.get('/run', async (req, res) => {
-    let react_port = 3333
     let child = null
     const rep = req.query.rep
     const dir = req.query.rep.replace('https://', '').replace('.git', '').replaceAll('/', '_')
@@ -24,7 +24,7 @@ app.get('/run', async (req, res) => {
     const appType = req.query.appType
     switch(appType) {
         case 'react':
-            command += ` && cd ./tmp/${dir} && npm i && cross-env PORT=${react_port++} npm start`
+            command += ` && cd ./tmp/${dir} && npm i && cross-env PORT=${++react_port} npm start`
             break;
     }    
     const runApp = () => {
@@ -47,8 +47,8 @@ app.get('/run', async (req, res) => {
         res.status(301).redirect(req.query.rep.replace('.git', '/pull/1/files'))
     }
     if(fs.existsSync(`tmp/${dir}`) && appType==="react"){
-        console.log(`cd ./tmp/${dir} && cross-env PORT=${react_port++} npm start  `);        
-        child = exec(`cd ./tmp/${dir} && cross-env PORT=${react_port++} npm start`, shellLog);    
+        console.log(`cd ./tmp/${dir} && cross-env PORT=${react_port} npm start  `);        
+        child = exec(`cd ./tmp/${dir} && cross-env PORT=${++react_port} npm start`, shellLog);    
         return
     }
 
